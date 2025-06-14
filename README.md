@@ -73,9 +73,43 @@ npm run dev
 
 ## 📸 Screenshots / Demo
 
-| Homepage | Search & View Book | Admin - Add Book |
-|---------|---------------------|------------------|
-| ![Homepage](./screenshots/home.png) | ![Search](./screenshots/search.png) | ![Add Book](./screenshots/addbook.png) |
+- Login Page
+  
+![ReadRipple UI Preview(Static)](Screenshots/1.png)
+
+- Sign Up Page
+  
+![ReadRipple UI Preview(Static)](Screenshots/2.png)
+
+- Home Page
+  
+![ReadRipple UI Preview(Static)](Screenshots/3.png)
+
+- View Book Details & Reviews
+  
+![ReadRipple UI Preview(Static)](Screenshots/4.png)
+
+- Search Book Results
+  
+![ReadRipple UI Preview(Static)](Screenshots/9.png)
+
+- My Library - Books I've Read
+  
+![ReadRipple UI Preview(Static)](Screenshots/5.png)
+
+- My Library - Books to Read
+  
+![ReadRipple UI Preview(Static)](Screenshots/6.png)
+
+- My Library - My Reviews
+  
+![ReadRipple UI Preview(Static)](Screenshots/7.png)
+
+- Add Book Dashboard (Admin Only)
+  
+![ReadRipple UI Preview(Static)](Screenshots/8.png)
+
+
 
 
 ---
