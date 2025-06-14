@@ -24,7 +24,6 @@
 |----------|---------|----------|
 | React + Tailwind CSS | Express.js + Node.js | MongoDB + Mongoose |
 
-- **Authentication**: JWT + Passport.js
 - **Routing**: React Router
 - **Security**: Backend-protected routes and admin-only access control
 
