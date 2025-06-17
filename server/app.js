@@ -3,10 +3,25 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
+const expressSession = require("express-session");
+const passport = require("passport");
+const userModel = require("./models/User");
 
 const app = express();
 
 app.use(cors());
+app.use(
+  expressSession({
+    resave: false,
+    saveUninitialized: false,
+    secret: "RAMRAHDWUAHD",
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.serializeUser(userModel.serializeUser());
+passport.deserializeUser(userModel.deserializeUser());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(cookieParser());
