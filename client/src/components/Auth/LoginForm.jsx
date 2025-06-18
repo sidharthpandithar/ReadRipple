@@ -20,10 +20,14 @@ export default function LoginForm() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", {
-        username: formData.username,
-        password: formData.password,
-      });
+      const res = await axios.post(
+        "http://localhost:5000/api/users/login",
+        {
+          username: formData.username,
+          password: formData.password,
+        },
+        { withCredentials: true }
+      );
 
       localStorage.setItem("user", JSON.stringify(res.data));
 
