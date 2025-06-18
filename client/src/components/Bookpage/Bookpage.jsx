@@ -4,14 +4,29 @@ import axios from "axios";
 
 export default function Bookpage() {
   const { id } = useParams();
+  const [user, setUser] = useState(null);
   const [book, setBook] = useState(null);
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(5);
   const [hasReviewed, setHasReviewed] = useState(false);
-  const user = JSON.parse(localStorage.getItem("user"));
   const [reviews, setReviews] = useState([]);
   const [reviewPage, setReviewPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/users/me", { withCredentials: true })
+      .then((res) => {
+        console.log("User from session:", res.data);
+        setUser(res.data);
+      })
+      .catch((err) => {
+        console.error(
+          "Failed to fetch user:",
+          err.response?.data || err.message
+        );
+      });
+  }, []);
 
   const fetchReviews = async (page = 1) => {
     try {
@@ -64,12 +79,16 @@ export default function Bookpage() {
 
   const handleReviewSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/reviews", {
-        user: user._id,
-        book: book._id,
-        content: reviewText,
-        rating,
-      });
+      const res = await axios.post(
+        "http://localhost:5000/api/reviews",
+        {
+          book: book._id,
+          content: reviewText,
+          rating,
+          user: user._id,
+        },
+        { withCredentials: true }
+      );
       alert("Review submitted!");
       setHasReviewed(true);
       setBook((prev) => ({
