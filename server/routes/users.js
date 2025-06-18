@@ -5,6 +5,7 @@ const User = require("../models/User");
 const localStrategy = require("passport-local");
 const passport = require("passport");
 passport.use(new localStrategy(User.authenticate()));
+const isAdmin = require("./middleware/isAdmin");
 
 router.post("/register", async (req, res) => {
   var userdata = new User({
@@ -37,14 +38,14 @@ router.post("/login", function (req, res, next) {
   })(req, res, next);
 });
 
-router.post("/:userId/to-read", async (req, res) => {
+router.post("/:userId/to-read", isAdmin, async (req, res) => {
   const { bookId } = req.body;
   await User.findByIdAndUpdate(req.params.userId, {
     $addToSet: { toReadBooks: bookId },
   });
   res.json({ message: "Book added to to-read list" });
 });
-router.get("/:userId/profile", async (req, res) => {
+router.get("/:userId/profile", isAdmin, async (req, res) => {
   try {
     const user = await User.findById(req.params.userId)
       .populate("readBooks", "title author coverImage")
@@ -69,7 +70,7 @@ router.get("/:userId/profile", async (req, res) => {
   }
 });
 
-router.patch("/:id/read", async (req, res) => {
+router.patch("/:id/read", isAdmin, async (req, res) => {
   try {
     const { bookId } = req.body;
     console.log("PATCH /read hit");
@@ -91,7 +92,7 @@ router.patch("/:id/read", async (req, res) => {
   }
 });
 
-router.patch("/:id/to-read", async (req, res) => {
+router.patch("/:id/to-read", isAdmin, async (req, res) => {
   try {
     const { bookId } = req.body;
 
@@ -108,6 +109,13 @@ router.patch("/:id/to-read", async (req, res) => {
     console.error("Error adding to toReadBooks:", err);
     res.status(500).json({ message: "Failed to add to toReadBooks" });
   }
+});
+
+router.get("/me", (req, res) => {
+  if (req.isAuthenticated()) {
+    return res.status(200).json(req.user);
+  }
+  res.status(401).json({ message: "Not authenticated" });
 });
 
 module.exports = router;
