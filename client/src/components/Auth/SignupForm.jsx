@@ -23,11 +23,15 @@ export default function SignupForm() {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/users/register", {
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-      });
+      const res = await axios.post(
+        "http://localhost:5000/api/users/register",
+        {
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        },
+        { withCredentials: true }
+      );
 
       console.log("User registered:", res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
