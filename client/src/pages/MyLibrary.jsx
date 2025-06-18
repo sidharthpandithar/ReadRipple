@@ -6,16 +6,36 @@ export default function MyLibrary() {
   const navigate = useNavigate();
   const [libraryData, setLibraryData] = useState(null);
   const [selectedSection, setSelectedSection] = useState("readBooks");
-
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(null);
+  const [loadingUser, setLoadingUser] = useState(true);
   const userId = user?._id;
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchUser = async () => {
       try {
-        if (!userId) return;
+        const res = await axios.get("http://localhost:5000/api/users/me", {
+          withCredentials: true,
+        });
+        setUser(res.data);
+      } catch (err) {
+        console.error("Failed to fetch user:", err);
+        setUser(null);
+      } finally {
+        setLoadingUser(false);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (!user) return;
+
+      try {
         const res = await axios.get(
-          `http://localhost:5000/api/users/${userId}/profile`
+          `http://localhost:5000/api/users/${user._id}/profile`,
+          { withCredentials: true }
         );
         setLibraryData(res.data);
       } catch (err) {
@@ -24,7 +44,7 @@ export default function MyLibrary() {
     };
 
     fetchData();
-  }, [userId]);
+  }, [user]);
 
   const renderBooks = (books) => (
     <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-8">
@@ -61,7 +81,17 @@ export default function MyLibrary() {
     </div>
   );
 
-  if (!userId) {
+  if (loadingUser) {
+    return (
+      <div className="h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
+        <Nav />
+        <hr />
+        <p className="p-4 text-zinc-200">Checking login status...</p>
+      </div>
+    );
+  }
+
+  if (!user) {
     return (
       <div className="h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
         <Nav />
