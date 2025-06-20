@@ -29,7 +29,7 @@ export default function LoginForm() {
         { withCredentials: true }
       );
 
-      localStorage.setItem("user", JSON.stringify(res.data));
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
       alert("Login successful!");
       navigate("/");

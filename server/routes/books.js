@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Book = require("../models/Book");
-const isAdmin = require("./middleware/isAdmin");
+// const isAdmin = require("./middleware/isAdmin");
 
-router.post("/", isAdmin, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { title, author, tags, genre, coverImage, publishDate, language } =
       req.body;
