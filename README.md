@@ -71,7 +71,7 @@ npm run dev
 
 ---
 
-## 📸 Screenshots / Demo
+## Screenshots / Demo
 
 - Login Page
   
