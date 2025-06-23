@@ -1,24 +1,24 @@
-# 📚 ReadRipple – Book Discovery & Review Platform
+# ReadRipple – Book Discovery & Review Platform
 
 **ReadRipple** is a full-stack MERN application that lets book lovers explore, review, and track books. Users can browse a curated collection, write reviews, and maintain their own reading list, while admins manage the book database.
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🔍 **Search** books by title, author, or genre
-- 🧾 **Read and write reviews**
-- ⭐ **Live average ratings** updated with every review
-- 📚 **My Library**: track books you’ve read or plan to read
-- 👤 **Role-based Authentication**
+- **Search** books by title, author, or genre
+- **Read and write reviews**
+- **Live average ratings** updated with every review
+- **My Library**: track books you’ve read or plan to read
+- **Role-based Authentication**
   - Users can register, log in, and post/edit/delete their own reviews
   - Admins can add/delete books
-- 🏷️ **Tags & genres**
-- 🖼️ **Real cover images** with online sources
+- **Tags & genres**
+- **Real cover images** with online sources
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Frontend | Backend | Database |
 |----------|---------|----------|
@@ -29,7 +29,7 @@
 
 ---
 
-## 🔐 Admin Access
+## Admin Access
 
 - Admins can:
   - Access the **Add New Book** page
@@ -38,7 +38,7 @@
 
 ---
 
-## 🧪 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -71,7 +71,7 @@ npm run dev
 
 ---
 
-## 📸 Screenshots / Demo
+## Screenshots / Demo
 
 - Login Page
   
@@ -114,35 +114,35 @@ npm run dev
 
 ---
 
-## ✨ Upcoming Features
+## Upcoming Features
 
-- ✅ Personalized book recommendations
-- ✅ Review likes & comment threads
-- ✅ User profile & activity history
-- ✅ Admin dashboard with analytics
+- Personalized book recommendations
+- Review likes & comment threads
+- User profile & activity history
+- Admin dashboard with analytics
 
 ---
 
-## 💡 Inspiration
+## Inspiration
 
 Built by a book lover for book lovers, **ReadRipple** aims to bring thoughtful reviews and personal reading lists into a clean, easy-to-use platform for readers of all genres.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions, issues and feature requests are welcome!  
 Feel free to open a pull request or issue.
 
 ---
 
-## 📄 License
+## License
 
 This project is [MIT](LICENSE) licensed.
 
 ---
 
-## 👋 Author
+## Author
 
 Made with ❤️ by [Sidharth Pandithar](https://github.com/sidharthpandithar)
 
