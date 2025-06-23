@@ -10,12 +10,13 @@ export default function SearchResults() {
     <div className="h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
       <Nav />
       <hr />
-      <div className="text-white p-10">
+      <div className="text-white p-10 h-full w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
         <h2 className="text-xl mb-4">
-          Search Results for: <span className="text-sky-400">{query}</span>
+          Found {results.length} Search Results for:{" "}
+          <span className="text-sky-400">{query}</span>
         </h2>
         {results.length > 0 ? (
-          <div className="grid grid-cols-7 gap-4">
+          <div className="md:grid md:grid-cols-7 flex flex-col gap-4">
             {results.map((book) => (
               <Link to={`/book/${book._id}`} key={book._id}>
                 <div

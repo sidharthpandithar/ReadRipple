@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+const API = import.meta.env.VITE_API_BASE_URL;
+import { ToastContainer, toast, Bounce } from "react-toastify";
 
 export default function Bookpage() {
   const { id } = useParams();
@@ -15,7 +17,7 @@ export default function Bookpage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/users/me", { withCredentials: true })
+      .get(`${API}/api/users/me`, { withCredentials: true })
       .then((res) => {
         console.log("User from session:", res.data);
         setUser(res.data);
@@ -30,9 +32,7 @@ export default function Bookpage() {
 
   const fetchReviews = async (page = 1) => {
     try {
-      const res = await axios.get(
-        `http://localhost:5000/api/reviews/book/${id}?page=${page}`
-      );
+      const res = await axios.get(`${API}/api/reviews/book/${id}?page=${page}`);
       setReviews(res.data.reviews);
       setTotalPages(res.data.totalPages);
       setReviewPage(res.data.currentPage);
@@ -43,7 +43,7 @@ export default function Bookpage() {
 
   useEffect(() => {
     const fetchBook = async () => {
-      const res = await axios.get(`http://localhost:5000/api/books/${id}`);
+      const res = await axios.get(`${API}/api/books/${id}`);
       setBook(res.data);
 
       const reviewed = res.data.reviews.some((r) => r.user?._id === user?._id);
@@ -55,32 +55,72 @@ export default function Bookpage() {
 
   const handleAddToRead = async () => {
     try {
-      await axios.patch(`http://localhost:5000/api/users/${user._id}/read`, {
+      await axios.patch(`${API}/api/users/${user._id}/read`, {
         bookId: book._id,
       });
-      alert("Book added to your 'Read' list.");
+      toast.success('Added to your "Read Already" List', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     } catch (err) {
       console.error(err);
-      alert("Failed to add book to read list.");
+      toast.error("Failed to add", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   };
 
   const handleAddToToRead = async () => {
     try {
-      await axios.patch(`http://localhost:5000/api/users/${user._id}/to-read`, {
+      await axios.patch(`${API}/api/users/${user._id}/to-read`, {
         bookId: book._id,
       });
-      alert("Book added to your 'To Read' list.");
+      toast.success('Added to your "To Read" List', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     } catch (err) {
       console.error(err);
-      alert("Failed to add book to to-read list.");
+      toast.error("Failed to Add", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   };
 
   const handleReviewSubmit = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/reviews",
+        `${API}/api/reviews`,
         {
           book: book._id,
           content: reviewText,
@@ -89,7 +129,17 @@ export default function Bookpage() {
         },
         { withCredentials: true }
       );
-      alert("Review submitted!");
+      toast.success("Review Submitted!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       setHasReviewed(true);
       setBook((prev) => ({
         ...prev,
@@ -97,7 +147,17 @@ export default function Bookpage() {
       }));
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Failed to submit review.");
+      toast.error("Failed to post review", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   };
 

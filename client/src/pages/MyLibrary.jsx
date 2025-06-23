@@ -8,12 +8,13 @@ export default function MyLibrary() {
   const [selectedSection, setSelectedSection] = useState("readBooks");
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
+  const API = import.meta.env.VITE_API_BASE_URL;
   const userId = user?._id;
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/users/me", {
+        const res = await axios.get(`${API}/api/users/me`, {
           withCredentials: true,
         });
         setUser(res.data);
@@ -33,10 +34,9 @@ export default function MyLibrary() {
       if (!user) return;
 
       try {
-        const res = await axios.get(
-          `http://localhost:5000/api/users/${user._id}/profile`,
-          { withCredentials: true }
-        );
+        const res = await axios.get(`${API}/api/users/${user._id}/profile`, {
+          withCredentials: true,
+        });
         setLibraryData(res.data);
       } catch (err) {
         console.error("Error fetching library:", err);
@@ -83,7 +83,7 @@ export default function MyLibrary() {
 
   if (loadingUser) {
     return (
-      <div className="h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
+      <div className="min-h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
         <Nav />
         <hr />
         <p className="p-4 text-zinc-200">Checking login status...</p>
@@ -93,7 +93,7 @@ export default function MyLibrary() {
 
   if (!user) {
     return (
-      <div className="h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
+      <div className="min-h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
         <Nav />
         <hr />
         <p className="p-4 text-red-500">
@@ -106,7 +106,7 @@ export default function MyLibrary() {
   if (!libraryData)
     return (
       <>
-        <div className=" h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
+        <div className=" min-h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
           <Nav />
           <hr />
           <p className="text-2xl font-bold p-4 text-zinc-200">
@@ -117,7 +117,7 @@ export default function MyLibrary() {
     );
 
   return (
-    <div className=" h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
+    <div className="  min-h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
       <Nav />
       <hr />
       <div className="w-full mx-auto p-4 text-zinc-200">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -45,13 +45,13 @@ export default function SignupForm() {
     }
   };
   return (
-    <div className="left w-1/2 h-full rounded-l-2xl overflow-hidden ">
-      <div className="flex flex-col justify-center items-center z-0 h-full w-full  p-10 ">
+    <div className="right md:w-1/2 h-full rounded-l-2xl overflow-hidden ">
+      <div className="flex flex-col justify-center items-center z-0 h-full w-full p-10 ">
         <p className="text-zinc-100 text-3xl font-bold">
           Join
           <span className=" text-sky-500"> ReadRipple</span>
         </p>
-        <p className="text-zinc-400 pb-10 pt-2">
+        <p className="block text-center text-zinc-400 pb-10 pt-2">
           Create your account to start exploring and sharing book reviews
         </p>
 

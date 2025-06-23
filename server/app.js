@@ -6,12 +6,13 @@ const cookieParser = require("cookie-parser");
 const expressSession = require("express-session");
 const passport = require("passport");
 const userModel = require("./models/User");
+require("dotenv").config();
 
 const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_ORIGIN,
     credentials: true,
   })
 );
@@ -19,7 +20,7 @@ app.use(
   expressSession({
     resave: false,
     saveUninitialized: false,
-    secret: "RAMRAHDWUAHD",
+    secret: process.env.SESSION_SECRET,
   })
 );
 
@@ -32,12 +33,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 mongoose
-  .connect("mongodb://localhost:27017/book-review-db", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error(" MongoDB connection error:", err));
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 app.use("/api/users", require("./routes/users"));
 app.use("/api/books", require("./routes/books"));

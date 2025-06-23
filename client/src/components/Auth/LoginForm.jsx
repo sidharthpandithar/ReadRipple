@@ -1,4 +1,5 @@
 import Button from "./Button";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
@@ -31,7 +32,17 @@ export default function LoginForm() {
 
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      alert("Login successful!");
+      toast.success("Logged in Succesfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       navigate("/");
     } catch (err) {
       console.error(err.response?.data || err.message);
@@ -40,12 +51,12 @@ export default function LoginForm() {
   };
   const navigate = useNavigate();
   return (
-    <div className="left w-1/2 h-full rounded-l-2xl overflow-hidden ">
+    <div className="left md:w-1/2 w-full h-full rounded-l-2xl overflow-hidden ">
       <div className="flex flex-col justify-center items-center z-0 h-full w-full  p-10 ">
         <p className="text-zinc-100 text-3xl">Howdy! </p>
         <p className="text-zinc-400 pb-10 pt-2">
-          Log into your <span className=" text-sky-500">ReadRipple</span>{" "}
-          Account
+          Log into your <span className="text-white">Read</span>
+          <span className=" text-sky-500">Ripple</span> Account
         </p>
 
         <form className="w-full h-full p-5" onSubmit={handleSubmit}>

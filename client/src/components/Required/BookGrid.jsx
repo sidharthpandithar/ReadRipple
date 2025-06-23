@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+const API = import.meta.env.VITE_API_BASE_URL;
 
 export default function BookGrid() {
   const navigate = useNavigate();
@@ -9,7 +10,7 @@ export default function BookGrid() {
 
   useEffect(() => {
     const fetchBooks = async () => {
-      const res = await axios.get("http://localhost:5000/api/books");
+      const res = await axios.get(`${API}/api/books`);
       let data = res.data;
 
       if (sortOption === "recent") {
@@ -31,7 +32,7 @@ export default function BookGrid() {
   }, [sortOption]);
 
   return (
-    <div className="px-6 py-10">
+    <div className="px-6 mt-6 md:h-full min-h-screen w-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900">
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-2xl font-semibold text-zinc-200">Explore Books</h2>
         <select
