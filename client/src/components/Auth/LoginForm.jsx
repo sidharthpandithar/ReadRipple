@@ -3,7 +3,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import axios from "axios";
-
+const API = import.meta.env.VITE_API_BASE_URL;
 export default function LoginForm() {
   const [formData, setFormData] = useState({
     username: "",
@@ -22,7 +22,7 @@ export default function LoginForm() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/users/login",
+        `${API}/api/users/login`,
         {
           username: formData.username,
           password: formData.password,

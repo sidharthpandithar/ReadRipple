@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+const API = import.meta.env.VITE_API_BASE_URL;
 
 import Button from "./Button";
 export default function SignupForm() {
@@ -24,7 +26,7 @@ export default function SignupForm() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/users/register",
+        `${API}/api/users/register`,
         {
           username: formData.username,
           email: formData.email,
@@ -34,14 +36,34 @@ export default function SignupForm() {
       );
 
       console.log("User registered:", res.data);
+      toast.success("Registered Succesfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       localStorage.setItem("user", JSON.stringify(res.data));
       navigate("/");
       window.location.reload();
     } catch (err) {
       console.error("Registration failed", err.response?.data || err.message);
-      alert(
-        "Registration failed: " + (err.response?.data?.message || err.message)
-      );
+
+      toast.error(err.response?.data?.message || err.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   };
   return (
