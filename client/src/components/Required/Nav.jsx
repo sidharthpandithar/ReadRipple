@@ -149,7 +149,7 @@ export default function Navbar() {
           <span className="cursor-pointer hover:text-sky-400">
             Recommended for you
           </span>
-          {user.isAdmin ? (
+          {user?.isAdmin ? (
             <span
               onClick={() => navigate("/add-book")}
               className="hover:text-white hover:bg-zinc-700  cursor-pointer"
