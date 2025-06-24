@@ -35,12 +35,12 @@ app.use(
     saveUninitialized: false,
     secret: process.env.SESSION_SECRET,
     store: MongoStore.create({
-      client: mongoose.connection.getClient(),
+      mongoUrl: process.env.MONGO_URI,
       collectionName: "sessions",
     }),
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
-      sameSite: "lax",
+      sameSite: "none",
       secure: true,
     },
   })
