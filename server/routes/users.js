@@ -127,4 +127,8 @@ router.get("/me", (req, res) => {
   res.status(401).json({ message: "Not authenticated" });
 });
 
+router.get("/ping", (req, res) => {
+  res.status(200).json({ status: "ok", msg: "🟢 Keepalive" });
+});
+
 module.exports = router;
